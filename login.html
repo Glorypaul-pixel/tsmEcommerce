@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login – TSM Cosmetics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800">
+    <nav
+      class="bg-[#580F41] text-[#C8A2C8] sticky top-0 z-50 shadow-md px-16 py-4 flex items-center justify-between"
+    >
+      <a href="index.html" class="flex items-center">
+        <img src="/image/purpleLogo.png" alt="TSM Logo" class="w-24 h-auto" />
+      </a>
+      <div>
+        <a href="index.html" class="hover:text-[#C8A2C8]">Home</a>
+      </div>
+    </nav>
+
+    <section class="flex items-center justify-center h-screen -mt-20 px-4">
+      <div class="bg-white shadow-lg p-8 rounded w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center mb-2 text-[#580F41]">
+          Welcome Back
+        </h2>
+        <p class="text-sm text-center text-[#C8A2C8] mb-6">
+          Login to your TSM Cosmetics account
+        </p>
+
+        <form id="login-form" class="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            class="w-full px-4 py-2 border rounded"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            class="w-full px-4 py-2 border rounded"
+            required
+          />
+          <button
+            type="submit"
+            class="w-full bg-[#580F41] text-white py-2 rounded hover:bg-[#C8A2C8] transition duration-200"
+          >
+            Login
+          </button>
+        </form>
+
+        <p class="text-sm mt-4 text-center">
+          Don’t have an account?
+          <a
+            href="register.html"
+            class="text-[#580F41] font-medium hover:underline"
+          >
+            Register
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <script>
+      function showToast(message, type = "info") {
+        const colors = {
+          info: "#580F41",
+          success: "#4BB543",
+          error: "#E53E3E",
+        };
+
+        Toastify({
+          text: message,
+          duration: 3000,
+          gravity: "top",
+          position: "right",
+          backgroundColor: colors[type],
+          stopOnFocus: true,
+        }).showToast();
+      }
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = e.target.email.value.trim();
+          const password = e.target.password.value.trim();
+
+          const storedUser = JSON.parse(localStorage.getItem("user"));
+
+          if (!storedUser) {
+            showToast("No account found. Please register first.", "error");
+            return;
+          }
+
+          if (storedUser.email === email && storedUser.password === password) {
+            localStorage.setItem("isLoggedIn", "true");
+            showToast("Login successful!", "success");
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 1500);
+          } else {
+            showToast("Invalid email or password.", "error");
+          }
+        });
+    </script>
+  </body>
+</html>

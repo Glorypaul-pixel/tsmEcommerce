@@ -20,7 +20,7 @@
       <div id="nav-right">
         <!-- Before login -->
         <a
-          href="/pages/auth.html"
+          href="/auth.html"
           id="auth-link"
           class="text-purple-600 font-semibold"
         >
@@ -507,7 +507,7 @@
 
       function logoutUser() {
         localStorage.removeItem("user");
-        window.location.href = "/pages/auth.html";
+        window.location.href = "/auth.html";
       }
 
       function showToast(message, color = "bg-green-600") {
@@ -532,7 +532,7 @@
 
           showToast("Login successful!");
           setTimeout(() => {
-            window.location.href = "/pages/index.html";
+            window.location.href = "/index.html";
           }, 1500);
         });
 
@@ -549,7 +549,7 @@
 
           showToast("Registration successful!");
           setTimeout(() => {
-            window.location.href = "/pages/index.html";
+            window.location.href = "/index.html";
           }, 1500);
         });
 

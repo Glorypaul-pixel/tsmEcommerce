@@ -11,7 +11,7 @@
       <!-- Back to Shop Button -->
       <div class="mb-6">
         <a
-          href="/pages/cart.html"
+          href="/cart.html"
           class="inline-flex items-center text-purple-700 hover:text-purple-900 font-medium"
         >
           ← Back to Cart
@@ -150,7 +150,7 @@
         if (!user) {
           showToast("You must be logged in to checkout.");
           // You can uncomment the redirect below when your login system is ready
-          // window.location.href = "/pages/auth.html";
+          // window.location.href = "/auth.html";
         }
 
         if (!cart.length) {
@@ -176,7 +176,7 @@
           showToast("✅ Order placed successfully!");
           localStorage.removeItem("cart");
           setTimeout(() => {
-            window.location.href = "/pages/index.html";
+            window.location.href = "/index.html";
           }, 2000);
         });
     </script>

@@ -84,21 +84,21 @@
     ></div>
 
     <!-- Scripts -->
- <script>
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  const deliveryFee = 1500;
+    <script>
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const deliveryFee = 1500;
 
-  function renderCart() {
-    const container = document.getElementById("cart-items");
-    container.innerHTML = "";
+      function renderCart() {
+        const container = document.getElementById("cart-items");
+        container.innerHTML = "";
 
-    let subtotal = 0;
+        let subtotal = 0;
 
-    cartItems.forEach((item, index) => {
-      const itemTotal = item.price * item.quantity;
-      subtotal += itemTotal;
+        cartItems.forEach((item, index) => {
+          const itemTotal = item.price * item.quantity;
+          subtotal += itemTotal;
 
-      container.innerHTML += `
+          container.innerHTML += `
         <div class="bg-[#C8A2C8] shadow p-4 rounded flex gap-4 items-center">
           <img src="${item.image}" alt="${item.name}" class="w-20 h-20 rounded object-cover" />
           <div class="flex-1">
@@ -117,24 +117,34 @@
           </div>
         </div>
       `;
-    });
+        });
 
-    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
-    document.getElementById("total").textContent = (subtotal + deliveryFee).toFixed(2);
-  }
+        document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+        document.getElementById("total").textContent = (
+          subtotal + deliveryFee
+        ).toFixed(2);
+      }
 
-  function updateQuantity(index, delta) {
-    cartItems[index].quantity += delta;
-    if (cartItems[index].quantity <= 0) {
-      cartItems.splice(index, 1);
-    }
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-    renderCart();
-  }
+      function updateQuantity(index, delta) {
+        cartItems[index].quantity += delta;
+        if (cartItems[index].quantity <= 0) {
+          cartItems.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        renderCart();
+      }
 
-  renderCart();
-</script>
-
+      renderCart();
+      document
+        .getElementById("checkout-btn")
+        .addEventListener("click", function () {
+          if (cartItems.length === 0) {
+            alert("Your cart is empty. Add items before proceeding.");
+            return;
+          }
+          window.location.href = "/pages/checkout.html";
+        });
+    </script>
 
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
